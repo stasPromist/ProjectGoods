@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Men's clothing store</h1>
+    <div class="main">
+        <div class="second">
+            <div class="odeja" id="outerwear"></div>
+
+            <img id="img1" src="../images/suits2.jpg" alt="Suit">
+            <p id="afterDis1">1000$</p>
+            <button id="btn1" class="third">Discount</button>
+        </div>
+        <div class="second">
+            <div class="odeja" id="shoes"></div>
+            <img src="../images/derby.jpg" alt="Derby">
+            <p id="afterDis2">500$</p>
+            <button id="btn2" class="third">Discount</button>
+        </div>
+        <div class="second">
+            <div class="odeja" id="underwear"></div>
+            <img src="../images/socks2.jpg" alt="Socks">
+            <p id="afterDis3">20$</p>
+            <button id="btn3" class="third">Discount</button>
+        </div>
+        <div class="second">
+            <div class="odeja" id="accessories"></div>
+            <img src="../images/belts.jpg" alt="Belts">
+            <p id="afterDis4">70$</p>
+            <button id="btn4" class="third">Discount</button>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        fetch("http://localhost:3004/Product Page")
+            .then(ProductPage => ProductPage.json())
+            .then(ProductPageObject => display(ProductPageObject));
+
+
+
+        function display(content) {
+            for (let x in content) {
+                document.getElementById(x).innerHTML = content[x];
+            }
+        };
+
+        fetch("http://localhost:3004/Discount")
+            .then(Dis => Dis.json())
+            .then(DisObject => discount(DisObject));
+
+        function discount(content) {
+            const button1 = document.getElementById("btn1");
+            const button2 = document.getElementById("btn2");
+            const button3 = document.getElementById("btn3");
+            const button4 = document.getElementById("btn4");
+            button1.addEventListener("click", discount = () => {
+                alert(content.Suit);
+                document.getElementById("afterDis1").innerHTML = content.Suit2;
+                document.getElementById("afterDis1").style.color = "red";
+            });
+            button2.addEventListener("click", discount = () => {
+                alert(content.Derby);
+                document.getElementById("afterDis2").innerHTML = content.Derby2;
+                document.getElementById("afterDis2").style.color = "red";
+            });
+            button3.addEventListener("click", discount = () => {
+                alert(content.Socks);
+                document.getElementById("afterDis3").innerHTML = content.Socks2;
+                document.getElementById("afterDis3").style.color = "red";
+            });
+            button4.addEventListener("click", discount = () => {
+                alert(content.Belts);
+                document.getElementById("afterDis4").innerHTML = content.Belts2;
+                document.getElementById("afterDis4").style.color = "red";
+            });
+        } 
+    </script>
+</body>
